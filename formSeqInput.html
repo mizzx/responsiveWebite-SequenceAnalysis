@@ -1,0 +1,31 @@
+<html>
+
+	<head>
+		<title>form Seq</title>
+		<link rel=stylesheet href=style/formStyle.css>
+	</head>
+	
+	<body>
+		<h1 style=color:#099ba0;text-align:center;>Sequence Entry Form</h1>
+		<div align=center id=formQuery>
+			<table width=75%>
+			<tr><td>
+			<form action=enteredSeq.cgi method=post>
+				<fieldset>
+				<legend>Entry Form</legend>
+				Display Id: <input type=text name=did><br>
+				Moltype: <input type=radio name=moltype
+				value=dna>DNA&nbsp;&nbsp;&nbsp;
+				<input type=radio name=moltype value=protein>Protein<br><br>
+				Sequence: <br><textarea rows=4 cols=50 name=seq></textarea><br><br>
+				<input type=submit value=Submit />&nbsp;&nbsp;&nbsp;
+				<input type=reset value=Reset />&nbsp;&nbsp;&nbsp;
+				<input type=button value=Cancel onClick=window.close(); return true;>
+				</fieldset>
+			</form>
+			</td></tr>
+			</table>
+		</div>
+	</body>
+
+</html>

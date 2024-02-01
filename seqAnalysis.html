@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<title> Seq Analysis </title>
+		<link rel=stylesheet href=style/formStyle.css>
+	</head>
+	
+	<body>
+		<h1 style=color:#099ba0;text-align:center;>Sequence Analysis</h1>
+		<div align=center id=formQuery>
+			<form id="formquery">
+				<table width=75%>
+				<tr><td>
+				<fieldset>
+				<legend>Entry Form</legend>
+				Moltype: <input type=radio id=mtype name=moltype
+				value=dna>DNA&nbsp;&nbsp;&nbsp;
+				<input type=radio id=mtype name=moltype value=protein>Protein<br><br>
+				Sequence: <br><textarea rows=4 cols=50 id=sequence
+				name=seq></textarea><br><br>
+				<input type=button id=run name=run value=Run
+				onclick=runAnalysis()>&nbsp;&nbsp;&nbsp;
+				<input type=reset id=reset name=reset value=Reset
+				onclick=location.reload()>&nbsp;&nbsp;&nbsp;
+				<input type=button id=cancel name=cancel value=Cancel
+				onClick=window.close(); return true;>
+				</fieldset>
+				</td></tr>
+				</table>
+			</form>
+		</div>
+		
+		<h1 style=color:#099ba0;text-align:center;>Results of Sequence Analysis</h1>
+		<div align=center id=resQuery>
+			<p id=seqLen></p>
+			<p id=resACGT></p>
+			<p id=resGC></p>
+			<p id=resRNA></p>
+		</div>
+		
+	<script>
+		function runAnalysis(){
+			var seq = document.getElementById('sequence').value;
+			
+			var mol;
+			
+			var seqLength = 0;
+			
+			var countA = 0, countC = 0, countG = 0, countT = 0;
+			
+			var rna="";
+
+			if (document.getElementById('mtype').checked) {
+				seqLength = seq.length;
+				
+				for (var i=0; i<seqLength; i++) {
+					if(seq[i] == 'a') {
+						countA++;
+						rna+=seq[i];}	
+		
+					else if (seq[i] == 'c') {
+						countC++;
+						rna+=seq[i];}
+		
+					else if (seq[i] == 'g') {
+						countG++;
+						rna+=seq[i];}
+		
+					else if (seq[i] == 't') {
+						countT++;
+						rna+='u';}
+				}
+		
+				document.getElementById('seqLen').innerHTML =
+				"Sequence length: " + seqLength;
+				
+				document.getElementById('resACGT').innerHTML =
+				"Number of bases: " + countA + "a " + countC + "c " + countG + "g " + countT + "t";
+				
+				document.getElementById('resGC').innerHTML = 
+				"% GC content: " + ((countC+countG)/seqLength*100).toFixed(2)+"%";
+				
+				document.getElementById('resRNA').innerHTML = 
+				"RNA sequence: " + rna;
+			}	
+			
+			else {
+				seqLength = seq.length;
+				document.getElementById('seqLen').innerHTML =
+				"Sequence length: " + seqLength;
+			}
+		}		
+	</script>
+	</body>
+</html>
